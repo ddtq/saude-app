@@ -1,0 +1,46 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-content fullscreen>
+      <ion-card>
+        <img src="././assets/image/logoPMPR.jpg" class="container" width='auto' height='100px' />
+        <ion-title class="centralizaTexto">Por gentileza, </ion-title>
+        <ion-title class="centralizaTexto">preencha o questionário</ion-title>
+      </ion-card>
+
+      <ion-card class="colorBackground">
+        <ion-title>Faça uma autoavaliação</ion-title>
+        <ion-title>do seu estado de saúde</ion-title>
+      </ion-card>
+      <ion-item *ngFor="let check of respostas" (click)="onclick(check)" class="colorBackground">
+        <ion-label>{{check.autoAvaliacao}}</ion-label>
+        <ion-checkbox [(ngModel)]="check.selected" color="primary">
+        </ion-checkbox>
+      </ion-item>
+
+      <ion-card class="colorBackground">
+        <ion-title>Teve contato próximo com caso suspeito</ion-title>
+        <ion-title>de COVID-19 nos últimos 14 dias?</ion-title>
+      </ion-card>
+      <ion-list>
+        <ion-item *ngFor="let check of contatoSuspeito" (click)="onclick(check)">
+          <ion-label>{{check.contatoSuspeito}}</ion-label>
+            <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+          </ion-item>
+      </ion-list>
+
+      <ion-card class="colorBackground">
+        <ion-title>Teve contato próximo com caso suspeito</ion-title>
+        <ion-title>de COVID-19 nos últimos 14 dias?</ion-title>
+      </ion-card>
+      <ion-list>
+        <ion-item *ngFor="let check of contatoConfirmado" (click)="onclick(check)">
+          <ion-label>{{check.contatoConfirmado}}</ion-label>
+          <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" (click)="salvarEstadoSaude()">Próximo</ion-button>
+
+    </ion-content>
+  </div>
+</ion-app>

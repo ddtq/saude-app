@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Storage } from '@ionic/storage';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +11,15 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+    rg: string;
+    dataNascimento: Date;
+  
+  constructor(private router: Router, public storage:Storage, public toastCtrl: ToastController ) {
 
+  }
+
+  direcionaLogin(){
+    this.router.navigateByUrl('/login'); 
+
+  }
 }

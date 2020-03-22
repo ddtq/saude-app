@@ -1,0 +1,29 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-content fullscreen>
+      <ion-card>
+        <img src="././assets/image/logoPMPR.jpg" class="container" width='auto' height='100px' />
+      </ion-card>
+      <ion-title class="centralizaTexto">Identificação</ion-title>
+      <div>
+        <ion-item>
+          <ion-label position="floating">RG <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input [(ngModel)]="rg"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Data Nascimento <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+          <ion-input [(ngModel)]="dataNascimento"></ion-input>
+        </ion-item>
+      </div>
+
+        <ion-button expand="block" (click)="buscarPolicial()">Enviar</ion-button>
+        
+    </ion-content>
+  </div>
+
+  
+</ion-app>
+

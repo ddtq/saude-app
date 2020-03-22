@@ -1,0 +1,25 @@
+<ion-app name="formPais" ng-submit="send()" >
+  <div class="ion-page" id="main-content">
+    <ion-content fullscreen>
+      <ion-card>
+        <img src="././assets/image/logoPMPR.jpg" class="container" width='auto' height='100px' />
+        <ion-title class="centralizaTexto">Por gentileza, </ion-title>
+        <ion-title class="centralizaTexto">preencha o questionário</ion-title>
+      </ion-card>
+
+      <ion-card class="colorBackground">
+        <ion-title>Esteve em outro país no últimos 14 dias?</ion-title>
+        <ion-title>do seu estado de saúde</ion-title>
+      </ion-card>
+      <ion-list>
+        <ion-item *ngFor="let check of outroPais" (click)="onclick(check)">
+          <ion-label>{{check.outroPais}}</ion-label>
+            <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" (click)="salvarPais()">Próximo</ion-button>
+
+    </ion-content>
+  </div>
+</ion-app>
