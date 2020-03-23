@@ -11,7 +11,7 @@ export class ApiService {
     send(dataParaEnvio) {
         var url = "http://146.148.88.190/saude/policial_verify";
         return this.http.post(url, dataParaEnvio, {
-            headers: new HttpHeaders({"Content-Type":"aplication/json"})
+            headers: new HttpHeaders({"Content-Type":"application/json"})
         })
     }
 }
