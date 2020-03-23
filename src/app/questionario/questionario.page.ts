@@ -76,8 +76,6 @@ export class QuestionarioPage implements OnInit {
 
   ]
 
-  nivelEnsino: string;
-
   constructor(private router: Router,
     public storage: Storage) {}
 

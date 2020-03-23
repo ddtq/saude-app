@@ -39,7 +39,7 @@ export class PaisPage implements OnInit {
 
 
   salvarPais() {
-    //this.router.navigateByUrl('/json');
+    this.router.navigateByUrl('/json');
   }
 
 

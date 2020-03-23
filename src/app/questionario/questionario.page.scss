@@ -49,7 +49,8 @@
   }
   
   .textoJustify {
-    text-align: justify;    
+    text-align: justify;
+    text-size-adjust: percentage($number: 50);   
   }
 
   .colorBackground{

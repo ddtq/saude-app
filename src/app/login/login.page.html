@@ -2,28 +2,38 @@
   <div class="ion-page" id="main-content">
     <ion-content fullscreen>
       <ion-card>
-        <img src="././assets/image/logoPMPR.jpg" class="container" width='auto' height='100px' />
+        <img src="././assets/image/logoPMPR2.jpg" class="container" width='auto' height='100px' />
       </ion-card>
       <ion-title class="centralizaTexto">Identificação</ion-title>
-      <div>
+      <div class="centralizaTexto">
         <ion-item>
           <ion-label position="floating">RG <ion-text color="danger">*</ion-text>
           </ion-label>
           <ion-input [(ngModel)]="rg"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label>Data Nascimento <ion-text color="danger">*</ion-text>
+          <ion-label position="floating">Data Nascimento <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
-          <ion-input [(ngModel)]="dataNascimento"></ion-input>
+          <ion-datetime value="1990-02-19" [(ngModel)]="dataNascimento"></ion-datetime>
+          </ion-item>
+
+        <!--<ion-item>
+          <img src="http://146.148.88.190/captcha" alt="captcha" />
         </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Informe o texto acima <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input [(ngModel)]="captcha"></ion-input>
+      
+        </ion-item>-->
       </div>
 
-        <ion-button expand="block" (click)="buscarPolicial()">Enviar</ion-button>
-        
+      <ion-button expand="block" (click)="buscarPolicial()">Enviar</ion-button>
+
+      {{retornoVerificacao}}
+
     </ion-content>
   </div>
-
-  
 </ion-app>
-
