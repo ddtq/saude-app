@@ -14,9 +14,28 @@
       <ion-list>
         <ion-item *ngFor="let check of outroPais" (click)="onclick(check)">
           <ion-label>{{check.outroPais}}</ion-label>
-          <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+          <ion-radio [(ngModel)]="check.selected" color="primary" slot="end"></ion-radio>
         </ion-item>
       </ion-list>
+
+      <!--<ion-item *ngIf="mostraCampo">
+        <ion-label>Onde?</ion-label>
+        <ion-select>
+          <ion-item *ngFor="let checkPais of pais" >
+            <ion-select-option (click)="onclickPais(checkPais)">{{checkPais.pais}}</ion-select-option>
+            <ion-radio [(ngModel)]="checkPais.selected" color="primary" slot="end"></ion-radio>
+          </ion-item>
+        </ion-select>
+      </ion-item>-->
+
+      <ion-item *ngIf="mostraCampo">
+        <ion-card class="colorBackground">
+          <ion-title class="centralizaTexto">Onde?</ion-title>
+        </ion-card>
+          <ion-label position="floating">país <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input [(ngModel)]="cidade"></ion-input>
+      </ion-item>
 
       <ion-button expand="block" (click)="salvarPais()">Próximo</ion-button>
 

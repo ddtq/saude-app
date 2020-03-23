@@ -76,24 +76,29 @@ export class QuestionarioPage implements OnInit {
 
   ]
 
+  dataInicioSintomas: Date;
+  cidade: String;
+  telefone: String;
+
   constructor(private router: Router,
-    public storage: Storage) {}
+    public storage: Storage) { }
 
   ngOnInit() {
   }
 
-  onclick(check){
+  onclick(check) {
     this.storage.set('autoAvaliacao', check);
     this.storage.set('contatoSuspeito', check);
     this.storage.set('contatoConfirmado', check);
+   // this.storage.set('cidade', this.cidade);
     //localStorage.setItem('autoAvaliacao', check);
-   //localStorage.setItem('contatoSuspeito', check);
+    //localStorage.setItem('contatoSuspeito', check);
     //localStorage.setItem('contatoConfirmado', check);
-    console.log(check);   
+    console.log(check);
 
   }
 
-  salvarEstadoSaude(){
+  salvarEstadoSaude() {
     this.router.navigateByUrl('/pais');
   }
 

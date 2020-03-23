@@ -13,8 +13,6 @@ export class PaisPage implements OnInit {
     {
       outroPais: 'Sim',
       selected: false
-
-
     },
     {
       outroPais: 'Não',
@@ -22,9 +20,78 @@ export class PaisPage implements OnInit {
     },
   ]
 
-  escondeCampo: false;
+  pais = [
+    {
+      pais: 'Alemanha',
+      selected: false
+    },
+    {
+      pais: 'Autrália',
+      selected: false
+    },
+    {
+      pais: 'Camboja',
+      selected: false
+    },
+    {
+      pais: 'China',
+      selected: false
+    },
+    {
+      pais: 'Coréia do Norte',
+      selected: false
+    },
+    {
+      pais: 'Coréia do Sul',
+      selected: false
+    },
+    {
+      pais: 'Emirados Árabes Unidos',
+      selected: false
+    },
+    {
+      pais: 'Filipinas',
+      selected: false
+    },
+    {
+      pais: 'França',
+      selected: false
+    },
+    {
+      pais: 'Irã',
+      selected: false
+    },
+    {
+      pais: 'Itália',
+      selected: false
+    },
+    {
+      pais: 'Japão',
+      selected: false
+    },
+    {
+      pais: 'Malásia',
+      selected: false
+    },
+    {
+      pais: 'Singapura',
+      selected: false
+    },
+    {
+      pais: 'Tailândia',
+      selected: false
+    },
+    {
+      pais: 'Vietnam',
+      selected: false
+    },
 
-  constructor(private router: Router,
+  ]
+
+  mostraCampo: boolean;
+
+  constructor(
+    private router: Router,
     public storage: Storage) { }
 
   ngOnInit() {
@@ -34,7 +101,23 @@ export class PaisPage implements OnInit {
     //this.storage.set('outroPais', check);
 
     localStorage.setItem('outroPais', check);
-    console.log(check);
+
+    console.log("++++++++: ", check.outroPais);
+
+    if (check.outroPais == "Sim") {
+      this.mostraCampo = true;
+    } else {
+      this.mostraCampo = false;
+    }
+  }
+
+  onclickPais(checkPais) {
+    //this.storage.set('outroPais', check);
+
+    localStorage.setItem('pais', checkPais);
+
+    console.log("==========: ", checkPais.pais);
+
   }
 
 

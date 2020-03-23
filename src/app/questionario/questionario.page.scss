@@ -31,9 +31,9 @@
   }
   
   .centralizaTexto {
-    text-align: center;
+    text-align: comparable($number1: 1, $number2: 2);
     width: auto;
-  }
+   }
   
   .container .fakeImg {
     background: no-repeat center;
@@ -61,4 +61,15 @@
   .texto{
     width: 100%;
 
+  }
+
+  .title{
+    text-indent: 50px;
+    text-align: justify;
+    letter-spacing: 3px;
+  }
+
+  div {
+    border: 1px solid gray;
+    padding: 8px;
   }
