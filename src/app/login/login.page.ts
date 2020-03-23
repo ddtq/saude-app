@@ -33,7 +33,7 @@ export class LoginPage {
       this.retornoVerificacao = dataReturnFromService;
       console.log("retorno: ", JSON.stringify(this.retornoVerificacao));
 
-      if (this.retornoVerificacao.result == true) {
+      if (this.retornoVerificacao.result === true) {
 
         this.storage.set('rg', this.rg);
         this.storage.set('dataNascimento', this.dataNascimento);
@@ -67,6 +67,17 @@ export class LoginPage {
         });
         await alert.present();  
       }
-    })
+    })    
   }
+
+
+
+
+
+
+
+
+
 }
+
+  

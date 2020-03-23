@@ -32,6 +32,7 @@
   
   .centralizaTexto {
     text-align: center;
+    width: auto;
   }
   
   .container .fakeImg {
@@ -54,5 +55,10 @@
   }
 
   .colorBackground{
-      background-color:#EEE8AA; 
+    background: darkblue;color:whitesmoke;
+  }
+
+  .texto{
+    width: 100%;
+
   }
