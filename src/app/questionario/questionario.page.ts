@@ -163,6 +163,10 @@ export class QuestionarioPage implements OnInit {
 
   ];*/
 
+  dataInicioSintomas: Date;
+  cidade: String;
+  telefone: String;
+
   constructor(private router: Router,
     public storage: Storage, public apiService: ApiService) { }
 
