@@ -1,57 +1,69 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { ApiService } from '../login/api.service';
 
 @Component({
   selector: 'app-questionario',
   templateUrl: './questionario.page.html',
-  styleUrls: ['./questionario.page.scss'],
+  styleUrls: ['./questionario.page.scss']
 })
+
 export class QuestionarioPage implements OnInit {
 
-  respostas = [
+  mostraCampo: boolean;
+  dataInicioSintomas: Date;
+  cidade: String;
+  telefone: String;
+  onde: String;
+
+  contato: any;
+
+  respostas: any;
+  retornoVerificacao: any;
+
+  perguntas = [
     {
-      autoAvaliacao: 'Cansaço',
+      pergunta: 'Cansaço',
       selected: false
     },
     {
-      autoAvaliacao: 'Congestão Nasal',
+      pergunta: 'Congestão Nasal',
       selected: false
     },
     {
-      autoAvaliacao: 'Corrimento Nasal (Coriza)',
+      pergunta: 'Corrimento Nasal (Coriza)',
       selected: false
     },
     {
-      autoAvaliacao: 'Dificuldade para respirar',
+      pergunta: 'Dificuldade para respirar',
       selected: false
     },
     {
-      autoAvaliacao: 'Dor de cabeça',
+      pergunta: 'Dor de cabeça',
       selected: false
     },
     {
-      autoAvaliacao: 'Dor de garganta',
+      pergunta: 'Dor de garganta',
       selected: false
     },
     {
-      autoAvaliacao: 'Dores pelo corpo',
+      pergunta: 'Dores pelo corpo',
       selected: false
     },
     {
-      autoAvaliacao: 'Febre',
+      pergunta: 'Febre',
       selected: false
     },
     {
-      autoAvaliacao: 'Mal estar geral',
+      pergunta: 'Mal estar geral',
       selected: false
     },
     {
-      autoAvaliacao: 'Tosse',
+      pergunta: 'Tosse',
       selected: false
     },
   ];
-
   contatoSuspeito = [
     {
       contatoSuspeito: 'Sim',
@@ -61,9 +73,7 @@ export class QuestionarioPage implements OnInit {
       contatoSuspeito: 'Não',
       selected: false
     },
-
-  ]
-
+  ];
   contatoConfirmado = [
     {
       contatoConfirmado: 'Sim',
@@ -73,33 +83,133 @@ export class QuestionarioPage implements OnInit {
       contatoConfirmado: 'Não',
       selected: false
     },
+  ];
+  outroPais = [
+    {
+      outroPais: 'Sim',
+      selected: false
+    },
+    {
+      outroPais: 'Não',
+      selected: false
+    },
+  ];
+  alertController: any;
+  /*pais = [
+    {
+      pais: 'Alemanha',
+      selected: false
+    },
+    {
+      pais: 'Autrália',
+      selected: false
+    },
+    {
+      pais: 'Camboja',
+      selected: false
+    },
+    {
+      pais: 'China',
+      selected: false
+    },
+    {
+      pais: 'Coréia do Norte',
+      selected: false
+    },
+    {
+      pais: 'Coréia do Sul',
+      selected: false
+    },
+    {
+      pais: 'Emirados Árabes Unidos',
+      selected: false
+    },
+    {
+      pais: 'Filipinas',
+      selected: false
+    },
+    {
+      pais: 'França',
+      selected: false
+    },
+    {
+      pais: 'Irã',
+      selected: false
+    },
+    {
+      pais: 'Itália',
+      selected: false
+    },
+    {
+      pais: 'Japão',
+      selected: false
+    },
+    {
+      pais: 'Malásia',
+      selected: false
+    },
+    {
+      pais: 'Singapura',
+      selected: false
+    },
+    {
+      pais: 'Tailândia',
+      selected: false
+    },
+    {
+      pais: 'Vietnam',
+      selected: false
+    },
 
-  ]
-
-  dataInicioSintomas: Date;
-  cidade: String;
-  telefone: String;
+  ];*/
 
   constructor(private router: Router,
-    public storage: Storage) { }
+    public storage: Storage, public apiService: ApiService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  async onclick(check) {
+    
+    if (check.outroPais == "Sim") {
+      this.mostraCampo = true;
+    } else {
+      this.mostraCampo = false;
+    }
   }
 
-  onclick(check) {
-    this.storage.set('autoAvaliacao', check);
-    this.storage.set('contatoSuspeito', check);
-    this.storage.set('contatoConfirmado', check);
-   // this.storage.set('cidade', this.cidade);
-    //localStorage.setItem('autoAvaliacao', check);
-    //localStorage.setItem('contatoSuspeito', check);
-    //localStorage.setItem('contatoConfirmado', check);
-    console.log(check);
+  async salvarEstadoSaude() {
 
+    this.respostas = {
+      "respostas:": this.perguntas,
+      "contatoSuspeito:": this.contatoSuspeito,
+      "contatoConfirmado:": this.contatoConfirmado,
+      "visitouOutroPais:": this.mostraCampo,
+      "Onde:": this.onde,
+      "dataInicioSintomas:": this.dataInicioSintomas,
+      "cidade:": this.cidade,
+      "telefone:": this.telefone
+    }
+
+    console.log(this.respostas);
+
+
+    var dataParaEnvio = {
+      "respostas:": this.perguntas,
+      "contatoSuspeito:": this.contatoSuspeito,
+      "contatoConfirmado:": this.contatoConfirmado,
+      "visitouOutroPais:": this.outroPais,
+      "Onde:": this.onde,
+      "dataInicioSintomas:": this.dataInicioSintomas,
+      "cidade:": this.cidade,
+      "telefone:": this.telefone
+    };
+
+    /*this.apiService.sendRespostas(dataParaEnvio).subscribe(async (dataReturnFromService) => {
+      this.retornoVerificacao = dataReturnFromService;
+      console.log("retorno: ", JSON.stringify(this.retornoVerificacao));
+    })*/
+
+    console.log("CONTATO: ", this.contato);
+    
   }
-
-  salvarEstadoSaude() {
-    this.router.navigateByUrl('/pais');
-  }
-
 }

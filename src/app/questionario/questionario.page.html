@@ -10,8 +10,8 @@
       <ion-card class="colorBackground">
         <ion-title class="centralizaTexto">Faça uma autoavaliação do seu estado de saúde</ion-title>
       </ion-card>
-      <ion-item *ngFor="let check of respostas" (click)="onclick(check)">
-        <ion-label>{{check.autoAvaliacao}}</ion-label>
+      <ion-item *ngFor="let check of perguntas">
+        <ion-label>{{check.pergunta}}</ion-label>
         <ion-checkbox [(ngModel)]="check.selected" color="primary">
         </ion-checkbox>
       </ion-item>
@@ -30,22 +30,42 @@
         <ion-title class="centralizaTexto"> de COVID-19 nos últimos 14 dias?</ion-title>
       </ion-card>
       <ion-list>
-        <ion-item *ngFor="let check of contatoSuspeito" (click)="onclick(check)">
+        <ion-item *ngFor="let check of contatoSuspeito" >
           <ion-label>{{check.contatoSuspeito}}</ion-label>
           <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
         </ion-item>
       </ion-list>
 
       <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Teve contato próximo com caso suspeito</ion-title>
+        <ion-title class="centralizaTexto">Teve contato próximo com caso confirmado</ion-title>
         <ion-title class="centralizaTexto">de COVID-19 nos últimos 14 dias?</ion-title>
       </ion-card>
       <ion-list>
-        <ion-item *ngFor="let check of contatoConfirmado" (click)="onclick(check)">
+        <ion-item *ngFor="let check of contatoConfirmado">
           <ion-label>{{check.contatoConfirmado}}</ion-label>
           <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
         </ion-item>
       </ion-list>
+
+      <ion-card class="colorBackground">
+        <ion-title class="centralizaTexto">Esteve em outro país</ion-title>
+        <ion-title class="centralizaTexto">nos últimos 14 dias?</ion-title>
+      </ion-card>
+      <ion-list>
+        <ion-item *ngFor="let check of outroPais" (click)="onclick(check)">
+          <ion-label>{{check.outroPais}}</ion-label>
+          <ion-radio [(ngModel)]="check.selected" color="primary" slot="end"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <ion-item *ngIf="mostraCampo">
+        <ion-card class="colorBackground">
+          <ion-title class="centralizaTexto">Onde?</ion-title>
+        </ion-card>
+          <ion-label position="floating">país <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input [(ngModel)]="onde"></ion-input>
+      </ion-item>
 
       <ion-card class="colorBackground">
         <ion-title class="centralizaTexto">Cidade onde se encontra</ion-title>
@@ -65,7 +85,7 @@
         <ion-input [(ngModel)]="telefone"></ion-input>
       </ion-item>
 
-      <ion-button expand="block" (click)="salvarEstadoSaude()">Próximo</ion-button>
+      <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
 
     </ion-content>
   </div>

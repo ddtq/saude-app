@@ -37,7 +37,7 @@ export class LoginPage {
 
         this.storage.set('rg', this.rg);
         this.storage.set('dataNascimento', this.dataNascimento);
-        this.storage.set('captcha', this.captcha);
+        //this.storage.set('captcha', this.captcha);
 
         this.storage.get('rg').then((rg) => {
           console.log('rg: ', rg);
