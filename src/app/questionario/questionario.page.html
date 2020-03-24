@@ -26,26 +26,34 @@
       </ion-item>
 
       <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Teve contato próximo com caso suspeito </ion-title>
+        <ion-title class="centralizaTexto">Teve contato próximo com caso suspeito</ion-title>
         <ion-title class="centralizaTexto"> de COVID-19 nos últimos 14 dias?</ion-title>
       </ion-card>
-      <ion-list>
-        <ion-item *ngFor="let check of contatoSuspeito" >
-          <ion-label>{{check.contatoSuspeito}}</ion-label>
-          <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+      <ion-radio-group [(ngModel)]="suspeito">
+        <ion-item>
+          <ion-label>Sim</ion-label>
+          <ion-radio name="suspeito" value="true" slot="end"></ion-radio>
         </ion-item>
-      </ion-list>
+        <ion-item>
+          <ion-label>Não</ion-label>
+          <ion-radio name="suspeito" value="false" slot="end"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
 
       <ion-card class="colorBackground">
         <ion-title class="centralizaTexto">Teve contato próximo com caso confirmado</ion-title>
         <ion-title class="centralizaTexto">de COVID-19 nos últimos 14 dias?</ion-title>
       </ion-card>
-      <ion-list>
-        <ion-item *ngFor="let check of contatoConfirmado">
-          <ion-label>{{check.contatoConfirmado}}</ion-label>
-          <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+      <ion-radio-group [(ngModel)]="confirmado">
+        <ion-item>
+          <ion-label>Sim</ion-label>
+          <ion-radio name="confirmado" value="true" slot="end"></ion-radio>
         </ion-item>
-      </ion-list>
+        <ion-item>
+          <ion-label>Não</ion-label>
+          <ion-radio name="confirmado" value="false" slot="end"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
 
       <ion-card class="colorBackground">
         <ion-title class="centralizaTexto">Esteve em outro país</ion-title>
@@ -57,6 +65,19 @@
           <ion-radio [(ngModel)]="check.selected" color="primary" slot="end"></ion-radio>
         </ion-item>
       </ion-list>
+
+      <!--
+      <ion-radio-group [(ngModel)]="pais">
+        <ion-item>
+          <ion-label>Sim</ion-label>
+          <ion-radio name="pais" value="true" slot="end" (click)="onclick(pais)"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Não</ion-label>
+          <ion-radio name="pais" value="false" slot="end" (click)="onclick(pais)"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    -->
 
       <ion-item *ngIf="mostraCampo">
         <ion-card class="colorBackground">
@@ -84,6 +105,9 @@
         </ion-label>
         <ion-input [(ngModel)]="telefone"></ion-input>
       </ion-item>
+
+   
+
 
       <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
 
