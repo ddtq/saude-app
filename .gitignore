@@ -28,5 +28,8 @@ npm-debug.log*
 /node_modules
 /platforms
 /plugins
+/tmp
 /www
 npm_config
+core
+android-studio-ide-192.6241897-linux.tar.gz

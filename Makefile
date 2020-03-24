@@ -1,7 +1,50 @@
 .phony: serve
 
+dockerbuild:
+	pwd=$(`pwd`) && \
+	cd .docker/builder && \
+	docker image build --build-arg http_proxy=$(http_proxy) \
+	--build-arg https_proxy=$(https_proxy) \
+	-t ddtq/saude-app_builder:0.1 . && cd $(pwd)
+
+build-android:
+	PWD=pwd
+	docker run --rm \
+			   -e HIGHCHARTS_USE_STYLED=NO \
+			   -e HIGHCHARTS_VERSION=latest \
+			   -e ACCEPT_HIGHCHARTS_LICENSE=YES \
+			   -e http_proxy=$(http_proxy) \
+			   -e https_proxy=$(http_proxy) \
+			   -v $(PWD)/npm_config:/root/.npm \
+			   -v $(PWD):/root/app \
+			   ddtq/saude-app_builder:0.1 \
+			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose && ng run app:ionic-cordova-build --platform=android # ionic cordova build android"
+
+build-browser:
+	PWD=pwd
+	docker run --rm \
+			   -e HIGHCHARTS_USE_STYLED=NO \
+			   -e HIGHCHARTS_VERSION=latest \
+			   -e ACCEPT_HIGHCHARTS_LICENSE=YES \
+			   -e http_proxy=$(http_proxy) \
+			   -e https_proxy=$(http_proxy) \
+			   -v $(PWD)/npm_config:/root/.npm \
+			   -v $(PWD):/root/app \
+			   ddtq/saude-app_builder:0.1 \
+			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose && ng run app:ionic-cordova-build --platform=browser # ionic cordova build browser"
+
 install:
-	docker run --rm --name "saude-app_builder_1" -e HIGHCHARTS_USE_STYLED=NO -e HIGHCHARTS_VERSION=latest -e ACCEPT_HIGHCHARTS_LICENSE=YES -e http_proxy=$(http_proxy) -e https_proxy=$(http_proxy) -v $(pwd)/npm_config:/root/.npm -v $(pwd):/root/app ddtq/saude-app_builder:0.1 bash -c "npm i --verbose"
+	PWD=pwd
+	docker run --rm --name "saude-app_builder_1" \
+			   -e HIGHCHARTS_USE_STYLED=NO \
+			   -e HIGHCHARTS_VERSION=latest \
+			   -e ACCEPT_HIGHCHARTS_LICENSE=YES \
+			   -e http_proxy=$(http_proxy) \
+			   -e https_proxy=$(http_proxy) \
+			   -v $(PWD)/npm_config:/root/.npm \
+			   -v $(PWD):/root/app \
+			   ddtq/saude-app_builder:0.1 \
+			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose"
 
 serve: install liveserve
 

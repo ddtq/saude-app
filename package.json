@@ -26,6 +26,7 @@
     "@ionic/storage": "^2.2.0",
     "angular2-recaptcha": "^1.1.0",
     "cordova-android": "8.1.0",
+    "cordova-browser": "6.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
@@ -37,6 +38,8 @@
     "@angular/compiler": "~8.2.14",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
+    "@babel/compat-data": "~7.8.0",
+    "@babel/preset-env": "~7.8.3",
     "@ionic/angular-toolkit": "^2.1.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
@@ -60,6 +63,9 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+  },
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
@@ -73,7 +79,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
