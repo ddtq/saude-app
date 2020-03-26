@@ -53,3 +53,9 @@ ion-content ion-toolbar {
   
 }
 
+.swiper-slide img {
+  max-height: 25%;
+  max-width: 25%;
+  margin: 60px 0 40px;
+  pointer-events: none;
+}

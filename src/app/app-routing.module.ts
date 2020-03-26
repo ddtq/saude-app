@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./questionario/questionario.module').then( m => m.QuestionarioPageModule)
   },
   {
-    path: 'pais',
-    loadChildren: () => import('./pais/pais.module').then( m => m.PaisPageModule)
+    path: 'resultado',
+    loadChildren: () => import('./resultado/resultado.module').then( m => m.ResultadoPageModule)
   },
   {
     path: 'json',

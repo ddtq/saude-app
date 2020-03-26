@@ -17,7 +17,7 @@ export class LoginPage {
 
   private rg: String;
   private dataNascimento: Date;
-  retornoVerificacao: any;
+  private retornoVerificacao: any;
   private captcha: String;
 
   constructor(
@@ -37,7 +37,7 @@ export class LoginPage {
 
         this.storage.set('rg', this.rg);
         this.storage.set('dataNascimento', this.dataNascimento);
-        //this.storage.set('captcha', this.captcha);
+	// this.storage.set('captcha', this.captcha);
 
         this.storage.get('rg').then((rg) => {
           console.log('rg: ', rg);
@@ -54,7 +54,6 @@ export class LoginPage {
         this.router.navigateByUrl('/questionario');
 
       } else {
-
         const alert = await this.alertController.create({
           header: 'Atenção!',
           message: 'Dados incorretos',
@@ -67,8 +66,6 @@ export class LoginPage {
         });
         await alert.present();  
       }
-    })    
+    })
   }
 }
-
-  

@@ -1,116 +1,131 @@
 <ion-app>
-  <div class="ion-page" id="main-content">
-    <ion-content fullscreen>
-      <ion-card>
-        <img src="././assets/image/logoPMPR2.jpg" class="container" width='auto' height='100px' />
-        <ion-title class="centralizaTexto">Por gentileza, </ion-title>
-        <ion-title class="centralizaTexto">preencha o questionário</ion-title>
-      </ion-card>
+  <ion-content fullscreen class="ion-padding" scroll-y="false">
+    <ion-slides>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Faça uma autoavaliação do seu estado de saúde</ion-title>
-      </ion-card>
-      <ion-item *ngFor="let check of perguntas">
-        <ion-label>{{check.pergunta}}</ion-label>
-        <ion-checkbox [(ngModel)]="check.selected" color="primary">
-        </ion-checkbox>
-      </ion-item>
+      <ion-slide>
+        <div>
+          <h2>Coronavírus</h2>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Data do início dos sintomas</ion-title>
-      </ion-card>
-      <ion-item>
-        <ion-label position="floating">data <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-datetime value="1990-02-19" [(ngModel)]="dataInicioSintomas"></ion-datetime>
-      </ion-item>
+          <img src="././assets/image/coronavirus.jpg" />
+          <p>
+            Coronavírus (CID10) é uma família de vírus que causam infecções respiratórias.
+            O novo agente do coronavírus foi descoberto em 31/12/19 após casos registrados na China.
+            Provoca a doença chamada de coronavírus (COVID-19).
+            Os primeiros coronavírus humanos foram isolados pela primeira vez em 1937.
+            No entanto, foi em 1965 que o vírus foi descrito como coronavírus,
+            em decorrência do perfil na microscopia, parecendo uma coroa.
+            <br>
+            (Fonte: https://www.saude.gov.br)
+          </p>
+        </div>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Teve contato próximo com caso suspeito</ion-title>
-        <ion-title class="centralizaTexto"> de COVID-19 nos últimos 14 dias?</ion-title>
-      </ion-card>
-      <ion-radio-group [(ngModel)]="suspeito">
-        <ion-item>
-          <ion-label>Sim</ion-label>
-          <ion-radio name="suspeito" value="true" slot="end"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Não</ion-label>
-          <ion-radio name="suspeito" value="false" slot="end"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+      </ion-slide>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Teve contato próximo com caso confirmado</ion-title>
-        <ion-title class="centralizaTexto">de COVID-19 nos últimos 14 dias?</ion-title>
-      </ion-card>
-      <ion-radio-group [(ngModel)]="confirmado">
-        <ion-item>
-          <ion-label>Sim</ion-label>
-          <ion-radio name="confirmado" value="true" slot="end"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Não</ion-label>
-          <ion-radio name="confirmado" value="false" slot="end"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
+      <ion-slide>
+        <div>
+          <ion-card class="colorBackground">
+            Faça uma autoavaliação do seu estado de saúde
+          </ion-card>
+          <ion-item *ngFor="let check of perguntas">
+            <ion-label>{{check.pergunta}}</ion-label>
+            <ion-checkbox [(ngModel)]="check.selected" color="primary">
+            </ion-checkbox>
+          </ion-item>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Esteve em outro país</ion-title>
-        <ion-title class="centralizaTexto">nos últimos 14 dias?</ion-title>
-      </ion-card>
-      <ion-list>
-        <ion-item *ngFor="let check of outroPais" (click)="onclick(check)">
-          <ion-label>{{check.outroPais}}</ion-label>
-          <ion-radio [(ngModel)]="check.selected" color="primary" slot="end"></ion-radio>
-        </ion-item>
-      </ion-list>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </div>
+      </ion-slide>
 
-      <!--
-      <ion-radio-group [(ngModel)]="pais">
-        <ion-item>
-          <ion-label>Sim</ion-label>
-          <ion-radio name="pais" value="true" slot="end" (click)="onclick(pais)"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Não</ion-label>
-          <ion-radio name="pais" value="false" slot="end" (click)="onclick(pais)"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-    -->
+      <ion-slide>
+        <div>
+          <ion-card class="colorBackground">
+            Data do início dos sintomas
+          </ion-card>
+          <ion-item>
+            <ion-label position="floating">data <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-datetime value="1990-02-19" [(ngModel)]="dataInicioSintomas"></ion-datetime>
+          </ion-item>
 
-      <ion-item *ngIf="mostraCampo">
-        <ion-card class="colorBackground">
-          <ion-title class="centralizaTexto">Onde?</ion-title>
-        </ion-card>
-          <ion-label position="floating">país <ion-text color="danger">*</ion-text>
-          </ion-label>
-          <ion-input [(ngModel)]="onde"></ion-input>
-      </ion-item>
+          <ion-card class="colorBackground">
+            Teve contato próximo com caso suspeito de COVID-19 nos últimos 14 dias?
+          </ion-card>
+          <ion-radio-group [(ngModel)]="suspeito">
+            <ion-item>
+              <ion-label>Sim</ion-label>
+              <ion-radio name="suspeito" value="true" slot="end"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Não</ion-label>
+              <ion-radio name="suspeito" value="false" slot="end"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Cidade onde se encontra</ion-title>
-      </ion-card>
-      <ion-item>
-        <ion-label position="floating">cidade <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input [(ngModel)]="cidade"></ion-input>
-      </ion-item>
+          <ion-card class="colorBackground">
+            Teve contato próximo com caso confirmado de COVID-19 nos últimos 14 dias?
+          </ion-card>
+          <ion-radio-group [(ngModel)]="confirmado">
+            <ion-item>
+              <ion-label>Sim</ion-label>
+              <ion-radio name="confirmado" value="true" slot="end"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Não</ion-label>
+              <ion-radio name="confirmado" value="false" slot="end"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
 
-      <ion-card class="colorBackground">
-        <ion-title class="centralizaTexto">Telefone para contato</ion-title>
-      </ion-card>
-      <ion-item>
-        <ion-label position="floating">telefone <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input [(ngModel)]="telefone"></ion-input>
-      </ion-item>
+          <ion-card class="colorBackground">
+            Esteve em outro país nos últimos 14 dias?
+          </ion-card>
+          <ion-radio-group [(ngModel)]=visitouPais (ionChange)="visitouSimNao()">
+            <ion-item >
+              <ion-label>Sim</ion-label>
+              <ion-radio value="true" slot="end"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Não</ion-label>
+              <ion-radio value="false" slot="end"></ion-radio>
+            </ion-item>
+          </ion-radio-group>         
+         
+          <ion-item *ngIf="mostraCampo">
+            <ion-card class="colorBackground">
+              <ion-title class="centralizaTexto">Onde?</ion-title>
+            </ion-card>
+              <ion-label position="floating">país <ion-text color="danger">*</ion-text>
+              </ion-label>
+              <ion-input [(ngModel)]="onde"></ion-input>
+          </ion-item>
+        </div>
 
-   
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-slide>
 
+      <ion-slide>
+        <div>
+          <ion-card class="colorBackground">
+            Cidade onde se encontra
+          </ion-card>
+          <ion-item>
+            <ion-label position="floating">cidade <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="cidade"></ion-input>
+          </ion-item>
 
-      <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
+          <ion-card class="colorBackground">
+            Telefone para contato
+          </ion-card>
+          <ion-item>
+            <ion-label position="floating">telefone <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="telefone"></ion-input>
+          </ion-item>
 
-    </ion-content>
-  </div>
+          <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
 </ion-app>

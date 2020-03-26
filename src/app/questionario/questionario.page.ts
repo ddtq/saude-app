@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { ApiService } from '../login/api.service';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-questionario',
   templateUrl: './questionario.page.html',
-  styleUrls: ['./questionario.page.scss']
+  styleUrls: ['./questionario.page.scss'],
 })
 
 export class QuestionarioPage implements OnInit {
 
+  
+  private retornoRespostas: any;
+  private msgTitulo: string;
+  private msgMensagem: string;
 
-  public teste: string;
-
-  mostraCampo: boolean;
-  dataInicioSintomas: Date;
-  cidade: String;
-  telefone: String;
-  onde: String;
-
+  mostraCampo: boolean = false;
+  dataInicioSintomas: Date = new Date();
+  cidade: String = "";
+  telefone: String ="";
+  onde: String ="";
   suspeito: any;
   confirmado: any;
-
+  visitouPais: any;
   respostas: any;
-  retornoVerificacao: any;
 
   perguntas = [
     {
@@ -78,33 +78,7 @@ export class QuestionarioPage implements OnInit {
       selected: false
     },
   ];
- 
-  /* contatoSuspeito = [
-    {
-      contatoSuspeito: 'Sim',
-      pergunta_id: 11,
-      selected: false
-    },
-    {
-      contatoSuspeito: 'Não',
-      pergunta_id: 11,
-      selected: false
-    },
-  ];
-  contatoConfirmado = [
-    {
-      contatoConfirmado: 'Sim',
-      pergunta_id: 12,
-      selected: false
-    },
-    {
-      contatoConfirmado: 'Não',
-      pergunta_id: 12,
-      selected: false
-    },
-  ];
-  */
- 
+
   outroPais = [
     {
       outroPais: 'Sim',
@@ -116,73 +90,85 @@ export class QuestionarioPage implements OnInit {
       pergunta_id: 13,
       selected: false
     },
-  ];  
-  
-  alertController: any;
+  ];
 
-  dataInicioSintomas: Date;
-  cidade: String;
-  telefone: String;
+  constructor(
+    public apiService: ApiService, 
+    private router: Router,
+    public storage: Storage) {
 
-  constructor(private router: Router,
-    public storage: Storage, public apiService: ApiService) { }
+      this.visitouPais = "false";
 
-  ngOnInit() { }
+    }
 
-  async onclick(check) {
-    
-    if (check.outroPais == "Sim") {
+  ngOnInit() {
+  }
+
+  visitouSimNao():void{
+
+    if (this.visitouPais == "true") {
       this.mostraCampo = true;
-    } else {
-      this.mostraCampo = false;
     }
   }
 
-  async salvarEstadoSaude() {
+  salvarEstadoSaude(){
 
+
+    this.storage.get('rg').then((rg) => {
+      
+      if(rg == null){
+        this.router.navigateByUrl('/home');
+  
+      }else{  
+        this.preparaParaEnvioRespostas();
+  
+        var dataParaEnvio = { "resposta": this.respostas, "rg":rg};
+        this.apiService.sendRespostas(dataParaEnvio).subscribe(async (dataReturnFromService) => {
+  
+        this.retornoRespostas = dataReturnFromService;
+        this.msgTitulo = JSON.stringify(this.retornoRespostas.result);
+        this.msgMensagem = JSON.stringify(this.retornoRespostas.mensagem);
+  
+  
+        console.log("retorno respostas titulo ", this.msgTitulo + " retorno msg" + this.msgMensagem);
+        console.log("rg buscado no storage", this.storage.get('rg'));
+        console.log(this.retornoRespostas);
+  
+        this.storage.set('titulo', this.msgTitulo);
+        this.storage.set('msg', this.msgMensagem);
+        this.router.navigateByUrl('/resultado');
+      })
+    }
+    }); 
+
+  }   
+
+  preparaParaEnvioRespostas(){
     var confirmadoBoolean: boolean;
     var suspeitoBoolean: boolean;
 
-    if(this.confirmado == "true"){
+    if (this.confirmado == "true") {
       confirmadoBoolean = true;
-    }else{
+    } else {
       confirmadoBoolean = false;
     }
 
-    if(this.suspeito == "true"){
+    if (this.suspeito == "true") {
       suspeitoBoolean = true;
-    }else{
+    } else {
       suspeitoBoolean = false;
     }
-    
-    this.respostas = {
-      "respostas": this.perguntas,
-      "pergunta_id 11": suspeitoBoolean,
-      "pergunta_id 12": confirmadoBoolean,
-      "pergunta_id 13": this.mostraCampo,
-      "pergunta_id 14": this.onde,
-      "pergunta_id 15": this.dataInicioSintomas,
-      "pergunta_id 16": this.cidade,
-      "pergunta_id 17": this.telefone
-    }
 
-    console.log(this.respostas);
-
-
-    var dataParaEnvio = {
-      "respostas:": this.perguntas,
-      "pergunta_id 11": this.suspeito,
-      "pergunta_id 12": this.confirmado,
-      "pergunta_id 13": this.mostraCampo,
-      "pergunta_id 14": this.onde,
-      "pergunta_id 15": this.dataInicioSintomas,
-      "pergunta_id 16": this.cidade,
-      "pergunta_id 17": this.telefone
-    };
-
-   /* this.apiService.sendRespostas(dataParaEnvio).subscribe(async (dataReturnFromService) => {
-      this.retornoVerificacao = dataReturnFromService;
-      console.log("retorno: ", JSON.stringify(this.retornoVerificacao));
-    })*/    
+    this.respostas = [
+      {"respostas": this.perguntas},
+      {"pergunta_id": 11, "inicio sintomas": this.dataInicioSintomas},
+      {"pergunta_id": 12, "contato suspeito": suspeitoBoolean},
+      {"pergunta_id": 13, "contato confirmado": confirmadoBoolean},
+      {"pergunta_id": 14, "esteve em outro país": this.mostraCampo},
+      {"pergunta_id": 15, "onde": this.onde},
+      {"pergunta_id": 16, "cidade": this.cidade},
+      {"pergunta_id": 17, "telefone contato": this.telefone}
+    ];
   }
+  
 }

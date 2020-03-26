@@ -8,9 +8,10 @@ export class ApiService {
 
     constructor(public http: HttpClient) { }
 
-    sendDados(dataParaEnvio) {
-        var url = "http://146.148.88.190/saude/policial_verify";
-        return this.http.post(url, dataParaEnvio, {
+
+    sendRespostas(dataRespostas) {
+        var url = "http://146.148.88.190/saude/respostas";
+        return this.http.post(url, dataRespostas, {
             headers: new HttpHeaders({"Content-Type":"application/json"})
         })
     }
