@@ -108,11 +108,12 @@ export class QuestionarioPage implements OnInit {
 
     if (this.visitouPais == "true") {
       this.mostraCampo = true;
+    } else {
+      this.mostraCampo = false;
     }
   }
 
   salvarEstadoSaude(){
-
 
     this.storage.get('rg').then((rg) => {
       
@@ -128,7 +129,6 @@ export class QuestionarioPage implements OnInit {
         this.retornoRespostas = dataReturnFromService;
         this.msgTitulo = JSON.stringify(this.retornoRespostas.result);
         this.msgMensagem = JSON.stringify(this.retornoRespostas.mensagem);
-  
   
         console.log("retorno respostas titulo ", this.msgTitulo + " retorno msg" + this.msgMensagem);
         console.log("rg buscado no storage", this.storage.get('rg'));
