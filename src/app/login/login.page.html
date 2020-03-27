@@ -13,10 +13,19 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Data Nascimento <ion-text color="danger">*</ion-text>
-          </ion-label>
-          <ion-datetime value="1990-02-19" [(ngModel)]="dataNascimento"></ion-datetime>
-          </ion-item>
+          <ion-label position="floating">Data Nascimento <ion-text color="danger">*</ion-text></ion-label>
+            <ion-datetime 
+              [dayShortNames]="customDayShortNames" 
+              displayFormat="DD MMM YYYY" 
+              monthShortNames="
+                janeiro, fevereiro, março, abril, 
+                maio, junho, julho, agosto, 
+                setembro, outubro, novembro, dezembro" 
+              cancel-text="cancelar" 
+              done-text="feito" 
+              value="01-01-1980">
+            </ion-datetime>
+        </ion-item>
 
         <ion-item>
           <ion-img src="http://146.148.88.190/captcha" alt="captcha"></ion-img>
@@ -26,7 +35,7 @@
           <ion-label position="floating">Informe o texto acima <ion-text color="danger">*</ion-text>
           </ion-label>
           <ion-input [(ngModel)]="captcha"></ion-input>
-      
+
         </ion-item>
       </div>
 
