@@ -1,12 +1,13 @@
 <ion-app>
   <ion-content fullscreen class="ion-padding" scroll-y="false">
-    <ion-slides>
+    <ion-slides paginationClickable=true #slideQuest>
 
       <ion-slide>
         <div>
           <h2>Coronavírus</h2>
 
           <img src="././assets/image/coronavirus.jpg" />
+
           <p>
             Coronavírus (CID10) é uma família de vírus que causam infecções respiratórias.
             O novo agente do coronavírus foi descoberto em 31/12/19 após casos registrados na China.
@@ -19,7 +20,8 @@
           </p>
         </div>
 
-        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        <ion-button fill="clear" (click)="slideNext()">Continuar <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
       </ion-slide>
 
       <ion-slide>
@@ -27,13 +29,33 @@
           <ion-card class="colorBackground">
             Faça uma autoavaliação do seu estado de saúde
           </ion-card>
-          <ion-item *ngFor="let check of perguntas">
-            <ion-label>{{check.pergunta}}</ion-label>
-            <ion-checkbox [(ngModel)]="check.selected" color="primary">
-            </ion-checkbox>
-          </ion-item>
+          <ion-card>
+            <ion-item *ngFor="let check of perguntas" style="height: 50px;">
+              <ion-label>{{check.pergunta}}</ion-label>
+              <ion-checkbox [(ngModel)]="check.selected" color="primary">
+              </ion-checkbox>
+            </ion-item>
+          </ion-card>
 
-          <ion-icon name="arrow-forward"></ion-icon>
+          <ion-row>
+            <ion-col></ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button fill="clear" (click)="slidePrev()">Voltar <ion-icon name="arrow-back-outline" slot="start">
+                </ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <div></div>
+            </ion-col>
+            <ion-col>
+              <ion-button fill="clear" (click)="slideNext()">Continuar <ion-icon name="arrow-forward" slot="end">
+                </ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
         </div>
       </ion-slide>
 
@@ -42,80 +64,99 @@
           <ion-card class="colorBackground">
             Data do início dos sintomas
           </ion-card>
-          <!--<ion-item>
-            <ion-label position="floating">data <ion-text color="danger">*</ion-text>
-            </ion-label>
-            <ion-datetime value="1990-02-19" [(ngModel)]="dataInicioSintomas"></ion-datetime>
-          </ion-item>-->
           <ion-item>
-            <ion-label position="floating">Data<ion-text color="danger">*</ion-text></ion-label>
-              <ion-datetime 
-                [dayShortNames]="customDayShortNames" 
-                displayFormat="DD-MMM-YYYY" 
-                monthShortNames="
+            <ion-label position="floating">Data<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DD-MMM-YYYY" monthShortNames="
                   janeiro, fevereiro, março, abril, 
                   maio, junho, julho, agosto, 
-                  setembro, outubro, novembro, dezembro" 
-                cancel-text="cancelar" 
-                done-text="feito" 
-                value="01-01-1980"
-                [(ngModel)]="dataInicioSintomas">
-              </ion-datetime>
+                  setembro, outubro, novembro, dezembro" cancel-text="cancelar" done-text="feito" value="01-01-1980"
+              [(ngModel)]="dataInicioSintomas">
+            </ion-datetime>
           </ion-item>
 
           <ion-card class="colorBackground">
             Teve contato próximo com caso suspeito de COVID-19 nos últimos 14 dias?
           </ion-card>
           <ion-radio-group [(ngModel)]="suspeito">
-            <ion-item>
-              <ion-label>Sim</ion-label>
-              <ion-radio name="suspeito" value="true" slot="end"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Não</ion-label>
-              <ion-radio name="suspeito" value="false" slot="end"></ion-radio>
-            </ion-item>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio name="suspeito" value="true" slot="end"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio name="suspeito" value="false" slot="end"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
           </ion-radio-group>
 
           <ion-card class="colorBackground">
             Teve contato próximo com caso confirmado de COVID-19 nos últimos 14 dias?
           </ion-card>
           <ion-radio-group [(ngModel)]="confirmado">
-            <ion-item>
-              <ion-label>Sim</ion-label>
-              <ion-radio name="confirmado" value="true" slot="end"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Não</ion-label>
-              <ion-radio name="confirmado" value="false" slot="end"></ion-radio>
-            </ion-item>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio name="confirmado" value="true" slot="end"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio name="confirmado" value="false" slot="end"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
           </ion-radio-group>
 
           <ion-card class="colorBackground">
             Esteve em outro país nos últimos 14 dias?
           </ion-card>
           <ion-radio-group [(ngModel)]=visitouPais (ionChange)="visitouSimNao()">
-            <ion-item >
-              <ion-label>Sim</ion-label>
-              <ion-radio value="true" slot="end"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Não</ion-label>
-              <ion-radio value="false" slot="end"></ion-radio>
-            </ion-item>
-          </ion-radio-group>         
-         
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio value="true" slot="end"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio value="false" slot="end"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+
           <ion-item *ngIf="mostraCampo">
-            <ion-card class="colorBackground">
-              <ion-title class="centralizaTexto">Onde?</ion-title>
-            </ion-card>
-              <ion-label position="floating">país <ion-text color="danger">*</ion-text>
-              </ion-label>
-              <ion-input [(ngModel)]="onde"></ion-input>
+            <ion-label position="floating">onde? <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="onde"></ion-input>
           </ion-item>
         </div>
 
-        <ion-icon name="arrow-forward"></ion-icon>
+        <ion-row>
+          <ion-col>
+            <ion-button fill="clear" (click)="slidePrev()">Voltar <ion-icon name="arrow-back-outline" slot="start">
+              </ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <div></div>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" (click)="slideNext()">Continuar <ion-icon name="arrow-forward" slot="end">
+              </ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </ion-slide>
 
       <ion-slide>
@@ -139,6 +180,12 @@
           </ion-item>
 
           <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
+
+          <div>
+            <ion-button fill="clear" (click)="slidePrev()">Voltar <ion-icon name="arrow-back-outline" slot="start">
+              </ion-icon>
+            </ion-button>
+          </div>
         </div>
       </ion-slide>
     </ion-slides>

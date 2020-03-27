@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ApiService } from './api.service';
@@ -11,6 +11,7 @@ import { ApiService } from './api.service';
 
 export class QuestionarioPage implements OnInit {
 
+  @ViewChild('slideQuest', {static: false}) slideQuest: any
   
   private retornoRespostas: any;
   private msgTitulo: string;
@@ -134,6 +135,14 @@ export class QuestionarioPage implements OnInit {
     } else {
       this.mostraCampo = false;
     }
+  }
+
+  slideNext(){
+    this.slideQuest.slideNext();
+  }
+
+  slidePrev(){
+    this.slideQuest.slidePrev();
   }
 
   getDataParaEnvio() {
