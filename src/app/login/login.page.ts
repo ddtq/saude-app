@@ -35,23 +35,19 @@ export class LoginPage {
 
       if (this.retornoVerificacao.result === true) {
 
-        this.storage.set('rg', this.rg);
-        this.storage.set('dataNascimento', this.dataNascimento);
+        this.storage.set('rg', this.rg).then(() => {
+          this.storage.get('rg').then((rg) => {
+            console.log('rg: ', rg);
+          });
+        });
+        this.storage.set('dataNascimento', this.dataNascimento).then(() => {
+          this.storage.get('dataNascimento').then((dataNascimento) => {
+            console.log('dataNascimento: ', dataNascimento);
+          });
+
+          this.router.navigateByUrl('/questionario');
+        });
 	      //this.storage.set('captcha', this.captcha);
-
-        this.storage.get('rg').then((rg) => {
-          console.log('rg: ', rg);
-        });
-
-        this.storage.get('dataNascimento').then((dataNascimento) => {
-          console.log('dataNascimento: ', dataNascimento);
-        });
-
-        this.storage.get('captcha').then((captcha) => {
-        console.log('captcha: ', captcha);
-        });
-
-        this.router.navigateByUrl('/questionario');
 
       } else {
         const alert = await this.alertController.create({

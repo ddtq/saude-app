@@ -18,6 +18,12 @@ export class HomePage {
 
   }
 
+  ngOnInit() {
+
+    this.storage.clear();
+
+  }
+
   direcionaLogin(){
     this.router.navigateByUrl('/login'); 
 

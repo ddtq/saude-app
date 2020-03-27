@@ -17,6 +17,12 @@ export class ResultadoPage implements OnInit {
 
   ngOnInit() {
 
+    this.storage.get('rg').then((rg) => {
+      if(rg == null){
+        this.router.navigateByUrl('/home');
+      } 
+    });
+
     this.titulo = this.storage.get('titulo').then((titulo) => {
       console.log('titulo é ', titulo);
       
@@ -32,10 +38,8 @@ export class ResultadoPage implements OnInit {
 
     console.log("pagina resultado -> titulo ", this.titulo + " msg " + this.msg.result);
 
+    this.storage.clear();
 
   }
-
-
-  
 
 }

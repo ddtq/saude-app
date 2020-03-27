@@ -26,6 +26,15 @@ export class QuestionarioPage implements OnInit {
   visitouPais: any;
   respostas: any;
 
+  dataParaEnvio: any = {
+    "policial": {
+      "rg": "",
+      "data_nascimento": "",
+      "telefone": ""
+    },
+    "respostas": []
+  }
+
   perguntas = [
     {
       pergunta: 'Cansaço',
@@ -102,6 +111,20 @@ export class QuestionarioPage implements OnInit {
     }
 
   ngOnInit() {
+
+    this.storage.get('rg').then((rg) => {
+      if(rg == null){
+        this.router.navigateByUrl('/home');
+      } else {
+        this.setRgEmDataParaEnvio(rg);
+        console.log('rg',rg);
+      }
+    });
+
+    this.storage.get('dataNascimento').then((dataNascimento) => {
+      this.setDataNascimentoEmDataParaEnvio(dataNascimento);
+    });
+
   }
 
   visitouSimNao():void{
@@ -113,62 +136,73 @@ export class QuestionarioPage implements OnInit {
     }
   }
 
+  getDataParaEnvio() {
+    return this.dataParaEnvio;
+  }
+
+  setRgEmDataParaEnvio(rg) {
+    this.dataParaEnvio.policial.rg = rg;
+  }
+
+  setDataNascimentoEmDataParaEnvio(data_nascimento) {
+    this.dataParaEnvio.policial.data_nascimento = data_nascimento;
+  }
+
+  setTelefoneEmDataParaEnvio(telefone) {
+    this.dataParaEnvio.policial.telefone = telefone;
+  }
+
+  setRespostasEmDataParaEnvio(respostas) {
+    this.dataParaEnvio.respostas = JSON.parse(JSON.stringify(respostas));
+  }
+
+  addRespostaEmDataParaEnvio(resposta) {
+    this.dataParaEnvio.respostas.push(resposta);
+  }
+
   salvarEstadoSaude(){
 
-    this.storage.get('rg').then((rg) => {
-      
-      if(rg == null){
-        this.router.navigateByUrl('/home');
+    this.preparaParaEnvioRespostas();
+
+    this.apiService.sendRespostas(this.getDataParaEnvio()).subscribe(async (dataReturnFromService) => {
   
-      }else{  
-        this.preparaParaEnvioRespostas();
+      this.retornoRespostas = dataReturnFromService;
+      this.msgTitulo = JSON.stringify(this.retornoRespostas.result);
+      this.msgMensagem = JSON.stringify(this.retornoRespostas.mensagem);
   
-        var dataParaEnvio = { "resposta": this.respostas, "rg":rg};
-        this.apiService.sendRespostas(dataParaEnvio).subscribe(async (dataReturnFromService) => {
+      // console.log("retorno respostas titulo ", this.msgTitulo + " retorno msg" + this.msgMensagem);
+      // console.log("rg buscado no storage", this.storage.get('rg'));
+      //console.log(this.retornoRespostas);
   
-        this.retornoRespostas = dataReturnFromService;
-        this.msgTitulo = JSON.stringify(this.retornoRespostas.result);
-        this.msgMensagem = JSON.stringify(this.retornoRespostas.mensagem);
-  
-        console.log("retorno respostas titulo ", this.msgTitulo + " retorno msg" + this.msgMensagem);
-        console.log("rg buscado no storage", this.storage.get('rg'));
-        console.log(this.retornoRespostas);
-  
-        this.storage.set('titulo', this.msgTitulo);
-        this.storage.set('msg', this.msgMensagem);
-        this.router.navigateByUrl('/resultado');
-      })
-    }
+      this.storage.set('titulo', this.msgTitulo);
+      this.storage.set('msg', this.msgMensagem);
+      this.router.navigateByUrl('/resultado');
+
     }); 
 
   }   
 
   preparaParaEnvioRespostas(){
-    var confirmadoBoolean: boolean;
-    var suspeitoBoolean: boolean;
+    var confirmadoBoolean: boolean = false;
+    var suspeitoBoolean: boolean = false;
 
     if (this.confirmado == "true") {
       confirmadoBoolean = true;
-    } else {
-      confirmadoBoolean = false;
     }
 
     if (this.suspeito == "true") {
       suspeitoBoolean = true;
-    } else {
-      suspeitoBoolean = false;
     }
 
-    this.respostas = [
-      {"respostas": this.perguntas},
-      {"pergunta_id": 11, "inicio sintomas": this.dataInicioSintomas},
-      {"pergunta_id": 12, "contato suspeito": suspeitoBoolean},
-      {"pergunta_id": 13, "contato confirmado": confirmadoBoolean},
-      {"pergunta_id": 14, "esteve em outro país": this.mostraCampo},
-      {"pergunta_id": 15, "onde": this.onde},
-      {"pergunta_id": 16, "cidade": this.cidade},
-      {"pergunta_id": 17, "telefone contato": this.telefone}
-    ];
+    this.setRespostasEmDataParaEnvio(this.perguntas);
+
+    this.addRespostaEmDataParaEnvio({"pergunta_id": 11, "pergunta": "inicio sintomas", "text": this.dataInicioSintomas});
+    this.addRespostaEmDataParaEnvio({"pergunta_id": 12, "pergunta": "contato suspeito", "selected": suspeitoBoolean});
+    this.addRespostaEmDataParaEnvio({"pergunta_id": 13, "pergunta": "contato confirmado", "selected": confirmadoBoolean});
+    this.addRespostaEmDataParaEnvio({"pergunta_id": 14, "pergunta": "esteve em outro país", "selected": this.mostraCampo});
+    this.addRespostaEmDataParaEnvio({"pergunta_id": 15, "pergunta": "onde", "text": this.onde});
+    this.addRespostaEmDataParaEnvio({"pergunta_id": 16, "pergunta": "cidade", "text": this.cidade});
+    this.setTelefoneEmDataParaEnvio(this.telefone);
   }
   
 }
