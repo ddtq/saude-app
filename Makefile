@@ -18,7 +18,7 @@ build-android:
 			   -v $(PWD)/npm_config:/root/.npm \
 			   -v $(PWD):/root/app \
 			   ddtq/saude-app_builder:0.1 \
-			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose && ng run app:ionic-cordova-build --platform=android # ionic cordova build android"
+			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose && rm -rf platforms && cordova platform add android --save && ionic cordova build android"
 
 build-browser:
 	PWD=pwd
@@ -31,7 +31,7 @@ build-browser:
 			   -v $(PWD)/npm_config:/root/.npm \
 			   -v $(PWD):/root/app \
 			   ddtq/saude-app_builder:0.1 \
-			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose && ng run app:ionic-cordova-build --platform=browser # ionic cordova build browser"
+			   bash -c "npm config set proxy $(https_proxy) && npm config set https-proxy $(https_proxy) && npm i --verbose && rm -rf platforms && cordova platform add browser --save && ionic cordova build browser"
 
 install:
 	PWD=pwd
