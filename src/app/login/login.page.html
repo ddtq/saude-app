@@ -16,14 +16,15 @@
           <ion-label position="floating">Data Nascimento <ion-text color="danger">*</ion-text></ion-label>
             <ion-datetime 
               [dayShortNames]="customDayShortNames" 
-              displayFormat="DD MMM YYYY" 
+              displayFormat="DD-MMM-YYYY" 
               monthShortNames="
                 janeiro, fevereiro, março, abril, 
                 maio, junho, julho, agosto, 
                 setembro, outubro, novembro, dezembro" 
               cancel-text="cancelar" 
               done-text="feito" 
-              value="01-01-1980">
+              value="01-01-1980"
+              [(ngModel)]="dataNascimento">
             </ion-datetime>
         </ion-item>
 

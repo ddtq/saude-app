@@ -42,10 +42,25 @@
           <ion-card class="colorBackground">
             Data do início dos sintomas
           </ion-card>
-          <ion-item>
+          <!--<ion-item>
             <ion-label position="floating">data <ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-datetime value="1990-02-19" [(ngModel)]="dataInicioSintomas"></ion-datetime>
+          </ion-item>-->
+          <ion-item>
+            <ion-label position="floating">Data<ion-text color="danger">*</ion-text></ion-label>
+              <ion-datetime 
+                [dayShortNames]="customDayShortNames" 
+                displayFormat="DD-MMM-YYYY" 
+                monthShortNames="
+                  janeiro, fevereiro, março, abril, 
+                  maio, junho, julho, agosto, 
+                  setembro, outubro, novembro, dezembro" 
+                cancel-text="cancelar" 
+                done-text="feito" 
+                value="01-01-1980"
+                [(ngModel)]="dataInicioSintomas">
+              </ion-datetime>
           </ion-item>
 
           <ion-card class="colorBackground">
