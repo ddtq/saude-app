@@ -10,7 +10,7 @@ export class ApiService {
 
 
     sendRespostas(dataRespostas) {
-        var url = "http://146.148.88.190/saude/respostas";
+        var url = "http://35.202.59.185/saude/respostas";
         return this.http.post(url, dataRespostas, {
             headers: new HttpHeaders({"Content-Type":"application/json"})
         })
