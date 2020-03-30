@@ -9,7 +9,7 @@
         <ion-item>
           <ion-label position="floating">RG <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input [(ngModel)]="rg"></ion-input>
+          <ion-input inputmode="numeric" type="number" min="1" max="9" maxLength="11" [(ngModel)]="rg"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -39,6 +39,7 @@
 
         </ion-item>
       </div>
+
 
       <ion-button expand="block" (click)="buscarPolicial()">Enviar</ion-button>
 
