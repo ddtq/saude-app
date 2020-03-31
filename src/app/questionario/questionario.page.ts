@@ -21,6 +21,7 @@ export class QuestionarioPage implements OnInit {
   dataInicioSintomas: Date = new Date();
   cidade: String = "";
   telefone: String ="";
+  celular: String ="";
   onde: String ="";
   suspeito: any;
   confirmado: any;
@@ -31,7 +32,8 @@ export class QuestionarioPage implements OnInit {
     "policial": {
       "rg": "",
       "data_nascimento": "",
-      "telefone": ""
+      "telefone": "",
+      "celular": ""
     },
     "respostas": []
   }
@@ -118,7 +120,6 @@ export class QuestionarioPage implements OnInit {
         this.router.navigateByUrl('/home');
       } else {
         this.setRgEmDataParaEnvio(rg);
-        console.log('rg',rg);
       }
     });
 
@@ -161,6 +162,10 @@ export class QuestionarioPage implements OnInit {
     this.dataParaEnvio.policial.telefone = telefone;
   }
 
+  setCelularEmDataParaEnvio(celular) {
+    this.dataParaEnvio.policial.celular = celular;
+  }
+
   setRespostasEmDataParaEnvio(respostas) {
     this.dataParaEnvio.respostas = JSON.parse(JSON.stringify(respostas));
   }
@@ -173,23 +178,22 @@ export class QuestionarioPage implements OnInit {
 
     this.preparaParaEnvioRespostas();
 
-    this.apiService.sendRespostas(this.getDataParaEnvio()).subscribe(async (dataReturnFromService) => {
+    try {
+      this.apiService.sendRespostas(this.getDataParaEnvio()).subscribe(async (dataReturnFromService) => {
   
       this.retornoRespostas = dataReturnFromService;
       this.msgTitulo = JSON.stringify(this.retornoRespostas.result);
       this.msgMensagem = JSON.stringify(this.retornoRespostas.mensagem);
-  
-      // console.log("retorno respostas titulo ", this.msgTitulo + " retorno msg" + this.msgMensagem);
-      // console.log("rg buscado no storage", this.storage.get('rg'));
-      //console.log(this.retornoRespostas);
-  
+    
       this.storage.set('titulo', this.msgTitulo);
       this.storage.set('msg', this.msgMensagem);
+      });
       this.router.navigateByUrl('/resultado');
-
-    }); 
-
-  }   
+    } catch (error) {
+      console.log(error);      
+    }
+    
+  }
 
   preparaParaEnvioRespostas(){
     var confirmadoBoolean: boolean = false;
@@ -211,7 +215,8 @@ export class QuestionarioPage implements OnInit {
     this.addRespostaEmDataParaEnvio({"pergunta_id": 14, "pergunta": "esteve em outro país", "selected": this.mostraCampo});
     this.addRespostaEmDataParaEnvio({"pergunta_id": 15, "pergunta": "onde", "text": this.onde});
     this.addRespostaEmDataParaEnvio({"pergunta_id": 16, "pergunta": "cidade", "text": this.cidade});
-    this.setTelefoneEmDataParaEnvio(this.telefone);
+    this.setTelefoneEmDataParaEnvio("+55" + this.telefone);
+    this.setCelularEmDataParaEnvio("+55" + this.celular);
   }
   
 }

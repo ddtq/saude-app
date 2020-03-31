@@ -31,6 +31,8 @@ export class ResultadoPage implements OnInit {
     this.storage.get('msg').then((msg) => {
       this.orientacao = msg;
     });
+
+    console.log("Pagina resultado, Storage: ->" + this.resultado + ", " + this.orientacao);
     
     this.storage.clear();
 
