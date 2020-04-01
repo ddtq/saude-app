@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'apresentacao',
+    loadChildren: () => import('./apresentacao/apresentacao.module').then( m => m.ApresentacaoPageModule)
+  },
+  {
     path: 'questionario',
     loadChildren: () => import('./questionario/questionario.module').then( m => m.QuestionarioPageModule)
   },

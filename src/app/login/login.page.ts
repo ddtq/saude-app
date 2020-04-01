@@ -55,7 +55,7 @@ export class LoginPage {
           this.storage.get('dataNascimento').then((dataNascimento) => {
           });
 
-          this.router.navigateByUrl('/questionario');
+          this.router.navigateByUrl('/apresentacao');
         });
 
       } else {
