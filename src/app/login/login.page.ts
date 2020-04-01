@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
-import { ToastController, AlertController } from '@ionic/angular';
-import { async } from 'rxjs/internal/scheduler/async';
+import { AlertController } from '@ionic/angular';
 import { ApiService } from './api.service';
 
 
@@ -26,7 +25,17 @@ export class LoginPage {
     public alertController: AlertController,
     public apiService: ApiService) { }
 
+
+  normalizaRg(){
+    for(var x = 0; x<=this.rg.length; x++){
+      this.rg = this.rg.replace(".","");
+      this.rg = this.rg.replace("-","");
+    }
+  }
+
   async buscarPolicial() {
+
+    this.normalizaRg();  
 
     var dataParaEnvio = { "rg": this.rg, "data_nascimento": this.dataNascimento, "captcha": this.captcha };
     this.apiService.sendDados(dataParaEnvio).subscribe(async (dataReturnFromService) => {
@@ -37,17 +46,14 @@ export class LoginPage {
 
         this.storage.set('rg', this.rg).then(() => {
           this.storage.get('rg').then((rg) => {
-            console.log('rg: ', rg);
           });
         });
         this.storage.set('dataNascimento', this.dataNascimento).then(() => {
           this.storage.get('dataNascimento').then((dataNascimento) => {
-            console.log('dataNascimento: ', dataNascimento);
           });
 
           this.router.navigateByUrl('/questionario');
         });
-	      //this.storage.set('captcha', this.captcha);
 
       } else {
         const alert = await this.alertController.create({

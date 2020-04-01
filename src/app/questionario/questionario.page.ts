@@ -206,9 +206,11 @@ export class QuestionarioPage implements OnInit {
     if (this.suspeito == "true") {
       suspeitoBoolean = true;
     }
+    
+    this.telefone = this.normalizaTelefones(this.telefone);
+    this.celular = this.normalizaTelefones(this.celular);
 
     this.setRespostasEmDataParaEnvio(this.perguntas);
-
     this.addRespostaEmDataParaEnvio({"pergunta_id": 11, "pergunta": "inicio sintomas", "text": this.dataInicioSintomas});
     this.addRespostaEmDataParaEnvio({"pergunta_id": 12, "pergunta": "contato suspeito", "selected": suspeitoBoolean});
     this.addRespostaEmDataParaEnvio({"pergunta_id": 13, "pergunta": "contato confirmado", "selected": confirmadoBoolean});
@@ -217,6 +219,15 @@ export class QuestionarioPage implements OnInit {
     this.addRespostaEmDataParaEnvio({"pergunta_id": 16, "pergunta": "cidade", "text": this.cidade});
     this.setTelefoneEmDataParaEnvio("+55" + this.telefone);
     this.setCelularEmDataParaEnvio("+55" + this.celular);
+  }
+
+  normalizaTelefones(tel){
+    for(var x = 0; x<=tel.length; x++){
+      tel = tel.replace("(","");
+      tel = tel.replace(")","");
+      tel = tel.replace("-","");
+    }
+    return tel;
   }
   
 }

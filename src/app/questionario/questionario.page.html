@@ -171,17 +171,17 @@
           </ion-item>
 
           <ion-card class="colorBackground">
-            Telefone para contato
+            Telefones para contato
           </ion-card>
           <ion-item>
             <ion-label position="floating">Telefone Fixo (se existir)
             </ion-label>
-            <ion-input type="tel" title="Informe um telefone do Brasil com DDD com 2 digitos" placeholder="DDD + Telefone" inputmode="tel" maxLength="10" [(ngModel)]="celular"></ion-input>
+            <ion-input mask="(00)0000-0000" type="tel" title="Informe um telefone do Brasil com DDD com 2 digitos" placeholder="DDD + Telefone" inputmode="tel" [(ngModel)]="celular"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Celular
             </ion-label>
-            <ion-input type="tel" title="Informe um celular do Brasil com DDD com 2 digitos" placeholder="DDD + Celular" inputmode="tel" maxLength="11" [(ngModel)]="telefone"></ion-input>
+            <ion-input mask="(00)00000-0000" type="tel" title="Informe um celular do Brasil com DDD com 2 digitos" placeholder="DDD + Celular" inputmode="tel" [(ngModel)]="telefone"></ion-input>
           </ion-item>
 
           <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
