@@ -32,9 +32,6 @@ export class ResultadoPage implements OnInit {
       this.orientacao = msg;
     });
 
-    console.log("Pagina resultado, Storage: ->" + this.resultado + ", " + this.orientacao);
-    
     this.storage.clear();
-
   }
 }
