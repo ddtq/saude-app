@@ -18,6 +18,8 @@ export class LoginPage {
   private dataNascimento: Date;
   private retornoVerificacao: any;
   private captcha: String;
+  private urlCaptcha: String = "http://35.202.59.185/captcha";
+  private brasaoPMPR: String = "../assets/image/pmprtransparente.png";
   
 
   constructor(

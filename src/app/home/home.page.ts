@@ -13,6 +13,7 @@ export class HomePage {
 
     rg: string;
     dataNascimento: Date;
+    brasaoPMPR: String = "../assets/image/pmprtransparente.png";
   
   constructor(private router: Router, public storage:Storage, public toastCtrl: ToastController ) {
 
