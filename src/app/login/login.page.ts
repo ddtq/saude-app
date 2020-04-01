@@ -18,6 +18,7 @@ export class LoginPage {
   private dataNascimento: Date;
   private retornoVerificacao: any;
   private captcha: String;
+  
 
   constructor(
     private router: Router,
