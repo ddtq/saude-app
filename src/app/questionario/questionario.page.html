@@ -132,16 +132,16 @@
 
       <ion-card>
         <ion-item>
-          <ion-label position="floating">Telefone Fixo (se existir)
-          </ion-label>
-          <ion-input mask="(00)0000-0000" type="tel" title="Informe um telefone do Brasil com DDD com 2 digitos"
-            placeholder="DDD + Telefone" inputmode="tel" [(ngModel)]="celular"></ion-input>
-        </ion-item>
-        <ion-item>
           <ion-label position="floating">Celular
           </ion-label>
           <ion-input mask="(00)00000-0000" type="tel" title="Informe um celular do Brasil com DDD com 2 digitos"
             placeholder="DDD + Celular" inputmode="tel" [(ngModel)]="telefone"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Telefone Fixo (se existir)
+          </ion-label>
+          <ion-input mask="(00)0000-0000" type="tel" title="Informe um telefone do Brasil com DDD com 2 digitos"
+            placeholder="DDD + Telefone" inputmode="tel" [(ngModel)]="celular"></ion-input>
         </ion-item>
       </ion-card>
 
