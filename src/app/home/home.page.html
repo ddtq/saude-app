@@ -1,15 +1,90 @@
 <ion-app>
   <ion-content fullscreenc>
-    <div style="margin-top: 100px; margin-bottom: 30px;">
+    <div style="margin-top: 50px; margin-bottom: 30px;">
       <img src={{brasaoPMPR}} class="imagem" />
       <h2 class="centralizaTexto">Polícia Militar do Estado do Paraná</h2>
       <p class="centralizaTexto">
         Visando a comodidade e segurança de nossos policiais, estamos disponibilizando este canal para
-        que o Sr(a). faça uma autoavaliação preliminar. 
+        que o Sr(a). faça uma autoavaliação preliminar.
       </p>
     </div>
 
-    <ion-button expand="block" (click)="direcionaLogin()">CONTINUAR</ion-button>
+    <div>
+      <ion-card class="textoJustify" *ngIf="escondeCampoTermo">
+        <ion-title style="text-align: center;">Termos de uso</ion-title>
+        <ion-text>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing
+            and typesetting industry. Lorem Ipsum has been
+            the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of
+            type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also
+            the leap into electronic typesetting, remaining
+            essentially unchanged.
+          </p>
+          <p>
+            It was popularised in the 1960s with the release
+            of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software
+            like Aldus PageMaker including versions of Lorem Ipsum
+          </p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing
+            and typesetting industry. Lorem Ipsum has been
+            the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of
+            type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also
+            the leap into electronic typesetting, remaining
+            essentially unchanged.
+          </p>
+          <p>
+            It was popularised in the 1960s with the release
+            of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software
+            like Aldus PageMaker including versions of Lorem Ipsum
+          </p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing
+            and typesetting industry. Lorem Ipsum has been
+            the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of
+            type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also
+            the leap into electronic typesetting, remaining
+            essentially unchanged.
+          </p>
+          <p>
+            It was popularised in the 1960s with the release
+            of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software
+            like Aldus PageMaker including versions of Lorem Ipsum
+          </p>
+        </ion-text>
 
+        <ion-radio-group [(ngModel)]=aceitoTermo (ionChange)="aceitarTermos()">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Aceito termos</ion-label>
+                <ion-radio value="true" slot="end"></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Não aceito</ion-label>
+                <ion-radio value="false" slot="end"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      </ion-card>
+
+      <div>
+          <ion-button *ngIf="mostraBotaoContinua" expand="block" (click)="direcionaLogin()">CONTINUAR</ion-button>
+      </div>
+
+    </div>
   </ion-content>
 </ion-app>
