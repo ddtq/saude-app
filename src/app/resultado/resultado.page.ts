@@ -11,6 +11,7 @@ export class ResultadoPage implements OnInit {
 
   private resultado:string;
   private orientacao:string;
+  private brasaoPMPR: String = "../assets/image/pmprtransparente.png";
 
   constructor(private router: Router, public storage: Storage) { }
 

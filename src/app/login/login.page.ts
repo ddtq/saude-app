@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from './api.service';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginPage {
   private dataNascimento: Date;
   private retornoVerificacao: any;
   private captcha: String;
-  private urlCaptcha: String = "http://35.202.59.185/captcha";
+  private urlCaptcha: String = environment.saudeApi + "/captcha";
   private brasaoPMPR: String = "../assets/image/pmprtransparente.png";
   
 

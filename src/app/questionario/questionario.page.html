@@ -1,31 +1,29 @@
 <ion-app>
   <ion-content> 
-
     <div>
-      <ion-card class="colorBackground">
-        Faça uma autoavaliação do seu estado de saúde
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Faça uma autoavaliação do seu estado de saúde
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item *ngFor="let check of perguntas" style="height: 50px;">
+            <ion-label>{{check.pergunta}}</ion-label>
+            <ion-checkbox slot="start" [(ngModel)]="check.selected" color="primary">
+            </ion-checkbox>
+          </ion-item>
+        </ion-card-content>
       </ion-card>
 
       <ion-card>
-        <ion-item *ngFor="let check of perguntas" style="height: 50px;">
-          <ion-label>{{check.pergunta}}</ion-label>
-          <ion-checkbox [(ngModel)]="check.selected" color="primary">
-          </ion-checkbox>
-        </ion-item>
-      </ion-card>
-
-      <ion-row>
-        <ion-col></ion-col>
-      </ion-row>
-    </div>
-
-    <div>
-      <ion-card class="colorBackground">
-        Data do início dos sintomas
-      </ion-card>
-
-      <ion-card>
-        <ion-item>
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Data do início dos sintomas
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
           <ion-label position="floating">Data<ion-text color="danger">*</ion-text>
           </ion-label>
           <ion-datetime [dayShortNames]="customDayShortNames" displayFormat="DD-MMM-YYYY" monthShortNames="
@@ -35,117 +33,132 @@
             [(ngModel)]="dataInicioSintomas">
           </ion-datetime>
         </ion-item>
-      </ion-card>
-
-      <ion-card class="colorBackground">
-        Teve contato próximo com caso suspeito de COVID-19 nos últimos 14 dias?
+        </ion-card-content>
       </ion-card>
 
       <ion-card>
-        <ion-radio-group [(ngModel)]="suspeito">
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Sim</ion-label>
-                <ion-radio name="suspeito" value="true" slot="end"></ion-radio>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-label>Não</ion-label>
-                <ion-radio name="suspeito" value="false" slot="end"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-radio-group>
-      </ion-card>
-
-      <ion-card class="colorBackground">
-        Teve contato próximo com caso confirmado de COVID-19 nos últimos 14 dias?
-      </ion-card>
-
-      <ion-card>
-        <ion-radio-group [(ngModel)]="confirmado">
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Sim</ion-label>
-                <ion-radio name="confirmado" value="true" slot="end"></ion-radio>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-label>Não</ion-label>
-                <ion-radio name="confirmado" value="false" slot="end"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-radio-group>
-      </ion-card>
-
-      <ion-card class="colorBackground">
-        Esteve em outro país nos últimos 14 dias?
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Teve contato próximo com caso <b><u>suspeito</u></b> de COVID-19 nos últimos 14 dias?
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-radio-group [(ngModel)]="suspeito">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio name="suspeito" value="true" slot="start"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio name="suspeito" value="false" slot="start"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-card-content>
       </ion-card>
 
       <ion-card>
-        <ion-radio-group [(ngModel)]=visitouPais (ionChange)="visitouSimNao()">
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Sim</ion-label>
-                <ion-radio value="true" slot="end"></ion-radio>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-label>Não</ion-label>
-                <ion-radio value="false" slot="end"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-radio-group>
-
-        <ion-item *ngIf="mostraCampo">
-          <ion-label position="floating">onde? <ion-text color="danger">*</ion-text>
-          </ion-label>
-          <ion-input [(ngModel)]="onde"></ion-input>
-        </ion-item>
-      </ion-card>
-    </div>
-
-    <div>
-      <ion-card class="colorBackground">
-        Cidade onde se encontra
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Teve contato próximo com caso <b><u>confirmado</u></b> de COVID-19 nos últimos 14 dias?
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-radio-group [(ngModel)]="confirmado">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio name="confirmado" value="true" slot="start"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio name="confirmado" value="false" slot="start"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-card-content>
       </ion-card>
 
       <ion-card>
-        <ion-item>
-          <ion-label position="floating">Cidade <ion-text color="danger">*</ion-text>
-          </ion-label>
-          <ion-input [(ngModel)]="cidade"></ion-input>
-        </ion-item>
-      </ion-card>
-
-      <ion-card class="colorBackground">
-        Telefones para contato
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Esteve em outro país nos últimos 14 dias?
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-radio-group [(ngModel)]=visitouPais (ionChange)="visitouSimNao()">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sim</ion-label>
+                  <ion-radio slot="start" value="true"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Não</ion-label>
+                  <ion-radio slot="start" value="false"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+          <ion-item *ngIf="mostraCampo">
+            <ion-label position="floating">Onde? <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="onde"></ion-input>
+          </ion-item>
+        </ion-card-content>
       </ion-card>
 
       <ion-card>
-        <ion-item>
-          <ion-label position="floating">Celular
-          </ion-label>
-          <ion-input mask="(00)00000-0000" type="tel" title="Informe um celular do Brasil com DDD com 2 digitos"
-            placeholder="DDD + Celular" inputmode="tel" [(ngModel)]="telefone"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Telefone Fixo (se existir)
-          </ion-label>
-          <ion-input mask="(00)0000-0000" type="tel" title="Informe um telefone do Brasil com DDD com 2 digitos"
-            placeholder="DDD + Telefone" inputmode="tel" [(ngModel)]="celular"></ion-input>
-        </ion-item>
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Cidade onde se encontra
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Cidade <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="cidade"></ion-input>
+          </ion-item>
+        </ion-card-content>
       </ion-card>
 
-      <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="colorBackground">
+            Telefones para contato
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Telefone Fixo (se existir)
+            </ion-label>
+            <ion-input mask="(00)0000-0000" type="tel" title="Informe um telefone do Brasil com DDD com 2 digitos"
+              placeholder="DDD + Telefone" inputmode="tel" [(ngModel)]="celular"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Celular
+            </ion-label>
+            <ion-input mask="(00)00000-0000" type="tel" title="Informe um celular do Brasil com DDD com 2 digitos"
+              placeholder="DDD + Celular" inputmode="tel" [(ngModel)]="telefone"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-button expand="block" (click)="salvarEstadoSaude()">Enviar</ion-button>
+      </ion-card>
 
     </div>
   </ion-content>
