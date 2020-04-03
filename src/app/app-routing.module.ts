@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'termos',
+    loadChildren: () => import('./termos/termos.module').then( m => m.TermosPageModule)
+  },
+  {
     path: 'apresentacao',
     loadChildren: () => import('./apresentacao/apresentacao.module').then( m => m.ApresentacaoPageModule)
   },
@@ -26,13 +30,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'sala',
     loadChildren: () => import('./sala/sala.module').then( m => m.SalaPageModule)
   },
-
-
-];
 
 @NgModule({
   imports: [

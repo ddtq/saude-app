@@ -1,0 +1,133 @@
+<ion-app>
+  <ion-content fullscreenc>
+    <div style="margin-top: 50px; margin-bottom: 30px;">
+      <img src={{brasaoPMPR}} class="imagem" />
+      <h2 class="centralizaTexto">Polícia Militar do Estado do Paraná</h2>
+    </div>
+
+    <div>
+      
+      <ion-card class="textoJustify">
+        <ion-title style="text-align: center;">Termos de uso</ion-title>
+        <ion-text>
+          
+          <h5>1. Aceitação dos Termos e Condições de Uso</h5>
+
+          <p>O uso do web-app, Saúde-App, oferecendo serviço de autoavaliação
+            pela Stive Corporation S/A. para um prévio atendimento, está condionado 
+            ao cumprimento dos Termos e Condições de Uso descritos abaixo. 
+            Para fazer uso do Site é preciso:
+          </p>
+          <p>(i) ler atentamente os termos descritos abaixo;</p>
+          <p>(ii) concordar expressamente com eles;</p>
+          <p>(iii) se "logar" fornecendo o R.G. e data de nascimento válido para ter acesso ao Site.</p>
+          <p>
+            Ao fazer uso do Site oferecido pela Stive Corporation S/A., você (a partir de agora denominado Usuário) 
+            concorda que leu, entendeu e aceitou os termos, regras e condições aqui dispostos.
+          </p>
+          <p>
+            Os Termos e Condições de Uso regulamentam a utilização do Site, 
+            que pertencem à Stive Corporation S/A., localizada à Av. Mal. Floriano Peixoto, 1401 - Rebouças, Curitiba, 
+            devidamente registrado.
+          </p>
+          <p>
+            O Site está disponível para aqueles com capacidade civil para utilizá-la. 
+            Caso o Usuário não possua capacidade para contratar ou utilizar o Site, 
+            quando for mencionado Usuário neste Termo será então entendido também que 
+            as declarações tenham sido prestadas por seu responsável legal.
+          </p>
+          <p>
+            A Stive Corporation S/A. se reserva o direito de modificar a qualquer 
+            momento a apresentação, configuração e disponibilização do Site. 
+            O mesmo se aplica a estes Termos e Condições de Uso, estabelecidos 
+            como condição fundamental para a utilização do serviço.
+          </p>
+
+          <h5>2. Site</h5>
+
+          <p>
+            A Stive Corporation S/A. oferece ao Usuário um Site que permite a navegação 
+            em seu conteúdo, que ficará hospedado nos servidores da Stive Corportion S/A.
+          </p>
+
+          <h5>3. Cadastro</h5>
+
+          <p>
+            O Usuário declara e se responsabiliza pela veracidade de todos os dados por 
+            ele fornecidos ao Site no momento de seu Cadastro e em qualquer atualização posterior, 
+            ficando responsável, portanto, pela sua exatidão e autenticidade.
+          </p>
+          <p>É dever do Usuário manter seus dados atualizados para a devida utilização do Site.</p>
+          <p>
+            Somente será permitido um único Cadastro por Usuário, sendo necessário para sua 
+            efetivação o preenchimento de todos os campos exigidos no respectivo formulário.
+          </p>
+          <p>
+            No momento do Cadastro, o Usuário deverá escolher um nome de usuário e senha (login), 
+            pessoal e intransferível, por meio dos quais ele terá acesso ao Site, bem como 
+            um telefone válido para contato, comprometendo-se a não informá-los a terceiros, 
+            responsabilizando-se exclusiva e pessoalmente pelo seu uso.
+          </p>
+          
+          <h5>4. Gratuidade</h5>
+
+          <p>
+            O Site é oferecido ao Usuário de forma gratuita. 
+            Os valores referentes à utilização dos serviços necessários ao acesso à Internet, 
+            entre outros, são de responsabilidade exclusiva do Usuário.
+          </p>
+
+          <h5>5. Utilização do Site</h5>
+
+          <p>
+            O Usuário reconhece que é responsável por quaisquer informações falsas que 
+            possam ser prestadas para a utilização do Site. O Usuário isenta a Stive Corporation S/A.
+            de qualquer responsabilidade quanto à veracidade dos dados pessoais fornecidos por ele 
+            quando do uso do Site.
+          </p>
+          <p>
+            O usuário reconhece, ainda, que estes Termos e Condições de Uso do 
+            Site oferecida pela Stive Corporation S/A. devem ser observados e fielmente cumpridos, 
+            sob pena de cancelamento de bloqueio de utilização do Site e demais medidas cabíveis, 
+            caso os mencionados Termos forem violados ou descumpridos.
+          </p>
+
+          <h5>6. Registro e dados pessoais</h5>
+
+          <p>É dever do Usuário manter atualizados os dados pessoais fornecidos quando da utilização do Site.</p>
+          <p>
+            A Empresa pode cancelar qualquer registro do Usuário, a qualquer momento e 
+            sem prévio aviso, assim que tiver conhecimento, e a seu exclusivo critério, 
+            se o Usuário descumprir, intencionalmente ou não, estes Termos e Condições de Uso, 
+            ou violar leis e regulamentos federais, estaduais e/ou municipais, ou violar os princípios 
+            legais, a moral e os bons costumes.
+          </p>
+          <p>Os Usuários que tiverem seus registros cancelados não poderão mais utilizar o Site.</p>
+
+        </ion-text>
+
+        <ion-radio-group [(ngModel)]="aceitoTermo" (ionChange)="aceitarTermos()">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Aceito termos</ion-label>
+                <ion-radio name="aceitoTermo" value="true" slot="end" color="sucsses"></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Não aceito</ion-label>
+                <ion-radio name="aceitoTermo" value="false" slot="end" color="danger"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      </ion-card>
+
+      <div>
+        <ion-button *ngIf="mostraBotaoContinua" expand="block" (click)="direcionaLogin()">CONTINUAR</ion-button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-app>

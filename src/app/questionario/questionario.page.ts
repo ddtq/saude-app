@@ -192,7 +192,6 @@ export class QuestionarioPage implements OnInit {
     } catch (error) {
       console.log(error);      
     }
-    
   }
 
   preparaParaEnvioRespostas(){
