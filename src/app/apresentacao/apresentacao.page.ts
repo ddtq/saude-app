@@ -19,7 +19,7 @@ export class ApresentacaoPage implements OnInit {
 
   ngOnInit() {}
 
-  abreQUestionario(){
+  abreQuestionario(){
     this.router.navigateByUrl('/questionario');
   }
 
