@@ -17,4 +17,5 @@ import { SalaPage } from './sala.page';
   ],
   declarations: [SalaPage]
 })
+
 export class SalaPageModule {}
