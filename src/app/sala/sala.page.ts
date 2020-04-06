@@ -1,27 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { HttpHeaders, HttpRequest, HttpClient } from '@angular/common/http';
-import { Url, UrlObject } from 'url';
-
 
 @Component({
   selector: 'app-sala',
   templateUrl: './sala.page.html',
-  styleUrls: ['./sala.page.scss'],
-  providers:[InAppBrowser]
+  styleUrls: ['./sala.page.scss']
 })
 
 export class SalaPage implements OnInit {
 
-  private urlParameters: Array<any> = [];
   private token:any = "";
   private respostaAPI:any;
   private result:boolean = false;
   private msg:string = "";
   private redirect:string = "";
 
-  constructor(public apiService: ApiService, private iab: InAppBrowser) { }
+  constructor(public apiService: ApiService) { }
 
   ngOnInit() {
   }
@@ -35,15 +29,19 @@ export class SalaPage implements OnInit {
       var dataParaEnvio = { "token": this.token[1] };
       this.apiService.sendToken(dataParaEnvio).subscribe(async (dataReturnFromService) => {
         this.respostaAPI = dataReturnFromService;
+
         this.result = this.respostaAPI.result;
-        this.msg = this.respostaAPI.message;
-        this.redirect = this.respostaAPI.redirect;
 
         if (this.result === true) {
+          this.redirect = this.respostaAPI.redirect;
+          this.msg = this.respostaAPI.message;
           window.location.href = this.redirect;
         }else{
-          alert("Este link está invalido ou expirado");
+          this.redirect = "#";
+          this.msg = "Este link está invalido ou expirado";
+          alert(this.msg);
         }
+
       });
     }
   }
