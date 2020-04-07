@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { ApiService } from './api.service';
+import { ApiService } from 'src/app/api.service';
+
+
 
 @Component({
   selector: 'app-questionario',

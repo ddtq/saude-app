@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
-import { ApiService } from './api.service';
+import { ApiService } from 'src/app/api.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
