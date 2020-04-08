@@ -16,8 +16,7 @@ export class TermosPage {
 
   brasaoPMPR: String = "../assets/image/pmprtransparente.png";
 
-  aceitoTermo: any;
-  escondeCampoTermo: boolean = false;
+  aceitoTermo: string = "";
 
   constructor(
     private router: Router,
@@ -31,6 +30,9 @@ export class TermosPage {
   }
 
   async aceitarTermos(): Promise<void> {
+
+    this.storage.set('aceitoTermo', this.aceitoTermo).then(() => {
+    });
 
     if (this.aceitoTermo == "true") {
 

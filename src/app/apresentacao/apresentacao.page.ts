@@ -17,7 +17,13 @@ export class ApresentacaoPage implements OnInit {
 
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storage.get('aceitoTermo').then((aceitoTermo)=>{
+      if(aceitoTermo != "true"){
+        this.router.navigateByUrl('/home');
+      }
+    });
+  }
 
   abreQuestionario(){
     this.router.navigateByUrl('/questionario');

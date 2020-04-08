@@ -125,6 +125,12 @@ export class QuestionarioPage implements OnInit {
       }
     });
 
+    this.storage.get('aceitoTermo').then((aceitoTermo)=>{
+      if(aceitoTermo != "true"){
+        this.router.navigateByUrl('/home');
+      }
+    });
+
     this.storage.get('dataNascimento').then((dataNascimento) => {
       this.setDataNascimentoEmDataParaEnvio(dataNascimento);
     });

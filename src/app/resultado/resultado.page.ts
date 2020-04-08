@@ -16,12 +16,15 @@ export class ResultadoPage implements OnInit {
   constructor(private router: Router, public storage: Storage) { }
 
   ngOnInit() {
-
-
     this.storage.get('rg').then((rg) => {
       if(rg == null){
         this.router.navigateByUrl('/home');
       } 
+    });
+    this.storage.get('aceitoTermo').then((aceitoTermo)=>{
+      if(aceitoTermo != "true"){
+        this.router.navigateByUrl('/home');
+      }
     });
 
   

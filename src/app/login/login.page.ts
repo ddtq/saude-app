@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['login.page.scss'],
 })
 
-export class LoginPage {
+export class LoginPage implements OnInit {
 
   private rg: String;
   private dataNascimento: Date;
@@ -27,6 +27,14 @@ export class LoginPage {
     public storage: Storage,
     public alertController: AlertController,
     public apiService: ApiService) { }
+
+  ngOnInit(){
+    this.storage.get('aceitoTermo').then((aceitoTermo)=>{
+      if(aceitoTermo != "true"){
+        this.router.navigateByUrl('/home');
+      }
+    });
+  }
 
 
   normalizaRg(){
